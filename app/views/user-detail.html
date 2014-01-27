@@ -1,0 +1,39 @@
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" data-ng-model="input.firstName" data-ng-required required>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" data-ng-model="input.lastName" data-ng-required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="login" class="col-sm-4 control-label">Login</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="login" placeholder="Login" data-ng-model="input.login">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="password" placeholder="Password"
+                   name="password" data-ng-model="input._password" data-validate="input._password===password2">
+        </div>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password"
+                   name="password2" data-ng-model="password2"
+                   required="true" data-validate="input._password===password2">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="email" placeholder="Email" data-ng-model="input.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="groups" class="col-sm-4 control-label">Groups</label>
+        <div class="col-sm-4">
+            <dn-select id="groups" data-ng-model="input.memberof" data-dn="'ou=groups,o=local'" data-objectclass="'group'" data-filter="{}"></dn-select>
+        </div>
+    </div>
+</form>
