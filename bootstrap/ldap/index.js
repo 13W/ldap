@@ -5,6 +5,7 @@
  */
 
 var ldapjs = require('ldapjs'),
+    config = require('easy-config'),
     logger = require('bunyan').createLogger({
         name: 'LDAP',
         level: 'info'
@@ -12,13 +13,13 @@ var ldapjs = require('ldapjs'),
     server = ldapjs.createServer({
         log: logger
     }),
-    baseDn = 'o=local',
+    baseDn = config.ldap.baseDn,
     
     api = require('./../api'),
     storage = api.get('Storage');
 
 
-server.listen(3389, '127.0.0.1', function () {
+server.listen(config.ldap.bindPort, config.ldap.bindHost, function () {
     console.log('LDAP server listening at: ' + server.url);
 });
 
@@ -31,9 +32,9 @@ function authorize(req, res, next) {
     return next();
 }
 
-server.bind('cn=root', function(req, res, next) {
+server.bind(config.ldap.rootDn, function(req, res, next) {
     console.log('bind to server', req.dn.toString(), req.credentials);
-    if (req.dn.toString() !== 'cn=root' || req.credentials !== 'secret') {
+    if (req.dn.toString() !== config.ldap.rootDn || req.credentials !== config.ldap.rootPw) {
         //noinspection JSUnresolvedFunction
         return next(new ldapjs.InvalidCredentialsError());
     }
