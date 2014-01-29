@@ -1,7 +1,8 @@
 // Generated on 2014-01-22 using generator-angular 0.7.1
 'use strict';
 var api = require('./bootstrap/api'),
-    $app = api.get('$app');
+    $app = api.get('$app'),
+    config = require('easy-config');
 
 
 
@@ -64,9 +65,9 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: config.http.port || 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: config.http.host || 'localhost',
         livereload: 35729
       },
       livereload: {
